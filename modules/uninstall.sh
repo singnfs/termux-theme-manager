@@ -13,7 +13,7 @@ CYAN='\033[0;36m'
 WHITE='\033[1;37m'
 RS='\033[0m'
 
-show_header() {
+show_header_uninstall() {
     clear
     echo -e "${RED}  ┌────────────────────────────────────────┐${RS}"
     echo -e "${RED}  │   🗑️  Terminal Reset & Uninstaller     │${RS}"
@@ -24,7 +24,7 @@ show_header() {
     echo ""
 }
 
-spinner() {
+spinner_uninstall() {
     local pid=$1
     local delay=0.1
     local spinstr='|/-\'
@@ -40,15 +40,15 @@ spinner() {
     echo -e " [${GREEN}✓${RS}] $2 ${GREEN}Selesai!${RS}"
 }
 
-run_uninstall() {
-    show_header
+action_uninstall() {
+    show_header_uninstall
     
     echo -e "${YELLOW}[!] Memulai pembersihan total...${RS}\n"
     sleep 1
 
     # 1. Hapus konfigurasi visual Termux (Tema, Font, Kursor, Keys)
     (rm -f "$HOME/.termux/colors.properties" "$HOME/.termux/font.ttf" "$HOME/.termux/termux.properties") &>/dev/null &
-    spinner $! "Menghapus konfigurasi tema, font, dan extra-keys"
+    spinner_uninstall $! "Menghapus konfigurasi tema, font, dan extra-keys"
 
     # 2. Babat Oh-My-Zsh & plugins jika ada, lalu balikin shell ke Bash bawaan
     if [ -d "$HOME/.oh-my-zsh" ] || [ -f "$HOME/.zshrc" ]; then
@@ -57,12 +57,12 @@ run_uninstall() {
             rm -f "$HOME/.zshrc"
             chsh -s bash
         ) &>/dev/null &
-        spinner $! "Menghapus Oh-My-Zsh & mengembalikan shell ke Bash"
+        spinner_uninstall $! "Menghapus Oh-My-Zsh & mengembalikan shell ke Bash"
     fi
 
     # 3. Reload settings secara realtime biar langsung polos instan
     (termux-reload-settings) &>/dev/null &
-    spinner $! "Menerapkan setelan pabrik Termux"
+    spinner_uninstall $! "Menerapkan setelan pabrik Termux"
 
     # --- FINISHING ---
     echo -e "\n========================================"
@@ -70,7 +70,5 @@ run_uninstall() {
     echo -e "========================================"
     echo -e "${WHITE}Termux lu sekarang udah polos lagi kayak baru pertama install.${RS}"
     echo -e "${YELLOW}Silakan ketik 'exit' atau buka session baru buat liat efeknya.${RS}\n"
+    pause_menu
 }
-
-# Eksekusi proses uninstall
-run_uninstall
