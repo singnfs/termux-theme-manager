@@ -15,6 +15,7 @@ source "$SCRIPT_DIR/modules/zsh.sh"
 source "$SCRIPT_DIR/modules/plugins.sh"
 source "$SCRIPT_DIR/modules/banner.sh"
 source "$SCRIPT_DIR/modules/neofetch.sh"
+source "$SCRIPT_DIR/modules/uninstall.sh"
 
 # ============================================================
 # MAIN LOOP
