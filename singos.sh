@@ -28,7 +28,8 @@ while true; do
         3) action_zsh_plugins ;;
         4) action_banner_prompt ;;
         5) action_neofetch ;;
-        6)
+        6) action_uninstall ;;
+        7)
             clear
             echo ""
             echo -e "${G}  ✦  Terima kasih sudah pakai SingOS Theme Manager!${RS}"
@@ -37,7 +38,7 @@ while true; do
             exit 0
             ;;
         *)
-            error "Opsi tidak valid! Pilih antara 1-6."
+            error "Opsi tidak valid! Pilih antara 1-7."
             sleep 1
             ;;
     esac
