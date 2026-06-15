@@ -11,17 +11,30 @@
 ## 🛠️ Instalasi
 
 ```bash
-git clone [https://github.com/singnfs/termux-theme-manager](https://github.com/singnfs/termux-theme-manager)
+git clone https://github.com/singnfs/termux-theme-manager
 cd termux-theme-manager
 chmod +x singos.sh
 bash singos.sh
-No,Fitur,Keterangan
-1,Basic Setup,"Update pkg + install git, curl, wget, figlet, ncurses"
-2,Install ZSH,Install ZSH + Oh My Zsh
-3,ZSH Plugins,Syntax highlighting + autosuggestions
-4,Banner & Prompt,ASCII banner SingOS + custom prompt icon Android
-5,Neofetch,Install neofetch untuk tampilan spek device
-6,Uninstall,Uninstall tema & reset Termux ke kondisi awal
+```
+
+---
+
+## 📋 Fitur
+
+| No | Fitur | Keterangan |
+|:--:|:------|:-----------|
+| 1  | **Basic Setup** | Update pkg + install git, curl, wget, figlet, ncurses |
+| 2  | **Install ZSH** | Install ZSH + Oh My Zsh |
+| 3  | **ZSH Plugins** | Syntax highlighting + autosuggestions |
+| 4  | **Banner & Prompt** | ASCII banner SingOS + custom prompt icon Android |
+| 5  | **Neofetch** | Install neofetch untuk tampilan spek device |
+| 6  | **Uninstall** | Uninstall tema & reset Termux ke kondisi awal |
+
+---
+
+## 📁 Struktur Repo
+
+```text
 termux-theme-manager/
 ├── modules/
 │   ├── banner.sh          ← Opsi 4: Banner & prompt
@@ -35,3 +48,28 @@ termux-theme-manager/
 ├── install.sh             ← Script instalasi otomatis (helper)
 ├── README.md              ← Dokumentasi ini
 └── singos.sh              ← Entry point utama script
+```
+
+---
+
+## 🔄 Update
+
+Untuk memperbarui ke versi terbaru, jalankan perintah berikut di dalam folder repository:
+
+```bash
+cd termux-theme-manager && git pull
+```
+
+---
+
+## 📱 Requirements
+
+- **Termux** (Android)
+- Koneksi internet aktif saat proses instalasi pertama kali
+
+---
+
+## 📄 License
+
+Proyek ini dilisensikan di bawah **MIT License** - © SingOS.  
+Bebas untuk dimodifikasi, didistribusikan, dan digunakan untuk keperluan pribadi maupun komunitas.
