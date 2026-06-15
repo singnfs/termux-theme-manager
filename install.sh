@@ -23,16 +23,25 @@ echo -e "${C}  ║${Y}       SINGOS THEME MANAGER — INSTALLER       ${C}║${R
 echo -e "${C}  ╚══════════════════════════════════════════════╝${RS}"
 echo ""
 
-# Cek apakah git tersedia
+# Cek dan install dependencies
+echo -e "${Y}  ➜  Mengecek dependencies...${RS}"
 if ! command -v git &>/dev/null; then
     echo -e "${Y}  ➜  Git belum terinstall, menginstall git...${RS}"
+    pkg update -y &>/dev/null
     pkg install git -y &>/dev/null
+    sleep 2
 fi
 
 # Clone atau update repo
 if [ -d "$INSTALL_DIR" ]; then
     echo -e "${Y}  ➜  Singos sudah terinstall, melakukan update...${RS}"
-    git -C "$INSTALL_DIR" pull --quiet
+    cd "$INSTALL_DIR"
+    git pull --quiet 2>/dev/null || {
+        echo -e "${R}  ✘  Gagal update, mencoba clone ulang...${RS}"
+        cd "$HOME"
+        rm -rf "$INSTALL_DIR"
+        git clone --quiet "$REPO" "$INSTALL_DIR"
+    }
 else
     echo -e "${Y}  ➜  Mengunduh SingOS Theme Manager...${RS}"
     git clone --quiet "$REPO" "$INSTALL_DIR"
@@ -53,6 +62,6 @@ fi
 echo ""
 echo -e "${C}  ➜  Memulai SingOS Theme Manager...${RS}"
 echo ""
-sleep 1
+sleep 2
 
 bash "$INSTALL_DIR/singos.sh"
