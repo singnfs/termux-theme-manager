@@ -30,9 +30,10 @@ show_menu() {
     echo -e "${C}  │${RS}  ${G}[4]${RS}  ${W}Pasang Banner Keren & Icon Android      ${C}│${RS}"
     echo -e "${C}  │${RS}  ${G}[5]${RS}  ${W}Install Neofetch (Tampilan Spek)        ${C}│${RS}"
     echo -e "${C}  ├──────────────────────────────────────────────┤${RS}"
-    echo -e "${C}  │${RS}  ${R}[6]${RS}  ${W}Keluar                                  ${C}│${RS}"
+    echo -e "${C}  │${RS}  ${R}[6]${RS}  ${W}Uninstall & Reset Termux                ${C}│${RS}"
+    echo -e "${C}  │${RS}  ${R}[7]${RS}  ${W}Keluar                                  ${C}│${RS}"
     echo -e "${C}  └──────────────────────────────────────────────┘${RS}"
     echo ""
-    echo -ne "  ${G}❯ Pilih opsi (1-6): ${RS}"
+    echo -ne "  ${G}❯ Pilih opsi (1-7): ${RS}"
     read -r opt
 }
