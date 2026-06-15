@@ -12,7 +12,7 @@ C="\e[1;36m"
 W="\e[1;37m"
 RS="\e[0m"
 
-REPO="https://github.com/singgti/termux-theme-manager"
+REPO="https://github.com/singnfs/termux-theme-manager"
 RAW="https://raw.githubusercontent.com/singnfs/termux-theme-manager/main"
 INSTALL_DIR="$HOME/.singos"
 
