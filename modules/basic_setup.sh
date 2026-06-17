@@ -4,7 +4,7 @@
 # ============================================================
 
 setup_termux_keys() {
-    info "Mengonfigurasi kursor pro dan extra-keys..."
+    info "Configuring pro cursor and extra-keys..."
     
     # Mastiin folder konfigurasi .termux udah ada
     mkdir -p "$HOME/.termux"
@@ -18,7 +18,7 @@ EOF
 
     # Reload settingan secara realtime tanpa restart aplikasi
     termux-reload-settings
-    success "Extra-keys & Kursor Pro berhasil diterapkan!"
+    success "Extra-keys & Cursors Pro successfully applied!"
 }
 
 action_basic_setup() {
@@ -31,12 +31,12 @@ action_basic_setup() {
 
     info "Install tools (git, curl, wget, figlet, ncurses)..."
     (pkg install git curl wget ncurses-utils figlet -y) &>/dev/null &
-    spinner $! "Menginstall dependencies"
+    spinner $! "Installer dependencies"
 
     # Otomatis eksekusi setup keys dan kursor pilihan lu
     setup_termux_keys
 
     divider
-    success "Basic Setup Selesai!"
+    success "Basic Setup Completed!""
     pause_menu
 }
