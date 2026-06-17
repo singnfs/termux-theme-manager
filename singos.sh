@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #   SINGOS THEME MANAGER — v2.0
-#   Kustomisasi Termux ala SingOS
+#   SingOS
 #   https://github.com/singnfs/termux-theme-manager
 # ============================================================
 
@@ -32,13 +32,13 @@ while true; do
         7)
             clear
             echo ""
-            echo -e "${G}  ✦  Terima kasih sudah pakai SingOS Theme Manager!${RS}"
-            echo -e "${Y}  ➜  Silakan restart Termux untuk melihat hasilnya.${RS}"
+            echo -e "${G}  ✦  Thank you for using SingOS Theme Manager!${RS}"
+            echo -e "${Y}  ➜  Please restart Termux to see the results.${RS}"
             echo ""
             exit 0
             ;;
         *)
-            error "Opsi tidak valid! Pilih antara 1-7."
+            error "Invalid option! Select between 1-7."
             sleep 1
             ;;
     esac
