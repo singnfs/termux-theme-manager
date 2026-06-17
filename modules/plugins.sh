@@ -5,7 +5,7 @@
 
 action_zsh_plugins() {
     show_header
-    echo -e "${C}  ┌─ AKTIFKAN HIGHLIGHT & AUTO-SUGGESTIONS ──────┐${RS}"
+    echo -e "${C}  ┌─ ENABLE HIGHLIGHTS & AUTO-SUGGESTIONS ──────┐${RS}"
     echo ""
     local ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
     mkdir -p "$ZSH_CUSTOM/plugins"
@@ -20,10 +20,10 @@ action_zsh_plugins() {
         "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" 2>/dev/null || true) &
     spinner $! "zsh-syntax-highlighting"
 
-    info "Menambahkan plugins ke .zshrc..."
+    info "Add plugins to .zshrc..."
     sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' "$HOME/.zshrc"
 
     divider
-    success "Plugins Berhasil Diaktifkan!"
+    success "Plugins Successfully Activated!"
     pause_menu
 }
