@@ -1,18 +1,18 @@
 #!/bin/bash
 # ============================================================
-#  modules/banner.sh — Opsi 4: Banner Keren & Icon Android
+#  modules/banner.sh — Opsi 4
 # ============================================================
 
 action_banner_prompt() {
     show_header
     echo -e "${C}  ┌─ BUAT BANNER & PROMPT SINGOS ────────────────┐${RS}"
     echo ""
-    echo -ne "  ${Y}Masukkan Nama Shell Prompt${RS}"
+    echo -ne "  ${Y}Enter Name Shell Prompt${RS}"
     echo -ne "  ${DIM}(Enter untuk default 'SingOS')${RS}: "
     read -r shell_name
     [ -z "$shell_name" ] && shell_name="SingOS"
 
-    info "Membuat file banner ~/.singos_banner..."
+    info "Create banner files ~/.singos_banner..."
 
     cat << "EOF" > "$HOME/.singos_banner"
 clear
@@ -37,16 +37,16 @@ if command -v neofetch &> /dev/null; then
 fi
 EOF
 
-    info "Menambahkan banner ke .zshrc..."
+    info "Add banners in .zshrc..."
     if ! grep -q ".singos_banner" "$HOME/.zshrc"; then
         echo "source \$HOME/.singos_banner" >> "$HOME/.zshrc"
     fi
 
     info "Mengatur custom PROMPT..."
     sed -i '/PROMPT=/d' "$HOME/.zshrc"
-    echo "PROMPT='%F{green}☯%F{cyan}[$shell_name]%f %F{green}%~%f %F{yellow} ➔%f '" >> "$HOME/.zshrc"
+    echo "PROMPT='%F{green}⏭%F{cyan}[$shell_name]%f %F{green}%~%f %F{yellow} ➔%f '" >> "$HOME/.zshrc"
 
     divider
-    success "Banner & Icon Android ☯ berhasil dipasang untuk '$shell_name'!"
+    success "Android Banner & Icon ⏭ successfully installed for '$shell_name'!"
     pause_menu
 }
