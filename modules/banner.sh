@@ -5,7 +5,7 @@
 
 action_banner_prompt() {
     show_header
-    echo -e "${C}  ┌─ BUAT BANNER & PROMPT SINGOS ────────────────┐${RS}"
+    echo -e "${C}  ┌─ CREATE SINGOS BANNER & PROMPT ────────────────┐${RS}"
     echo ""
     echo -ne "  ${Y}Enter Name Shell Prompt${RS}"
     echo -ne "  ${DIM}(Enter untuk default 'SingOS')${RS}: "
