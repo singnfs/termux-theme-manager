@@ -9,9 +9,9 @@ action_neofetch() {
     echo ""
     info "Menginstall Neofetch..."
     (pkg install neofetch -y) &>/dev/null &
-    spinner $! "Menginstall Neofetch"
+    spinner $! "Installer Neofetch"
 
     divider
-    success "Neofetch berhasil diinstal!"
+    success "Neofetch installed successfully!"
     pause_menu
 }
