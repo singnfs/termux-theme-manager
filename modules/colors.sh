@@ -37,6 +37,6 @@ divider() { echo -e "${DIM}${C}  ───────────────�
 # Pause sebelum kembali ke menu
 pause_menu() {
     echo ""
-    echo -ne "${DIM}  Tekan Enter untuk kembali ke menu...${RS}"
+    echo -ne "${DIM}  Press Enter to return to the menu....${RS}"
     read -r
 }
