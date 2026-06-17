@@ -1,27 +1,27 @@
 #!/bin/bash
 # ============================================================
-#  modules/zsh.sh — Opsi 2: Install & Konfigurasi ZSH
+#  modules/zsh.sh — Option 2: Install & Configure ZSH
 # ============================================================
 
 action_install_zsh() {
     show_header
-    echo -e "${C}  ┌─ INSTALL & KONFIGURASI ZSH ──────────────────┐${RS}"
+    echo -e "${C}  ┌─ INSTALL & CONFIGURE ZSH ────────────────────┐${RS}"
     echo ""
-    info "Menginstall ZSH..."
+    info "Installing ZSH..."
     (pkg install zsh -y) &>/dev/null &
-    spinner $! "Menginstall ZSH"
+    spinner $! "Installing ZSH"
 
-    info "Menginstall Oh My Zsh..."
+    info "Installing Oh My Zsh..."
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
         (sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended) &>/dev/null &
-        spinner $! "Menginstall Oh My Zsh"
+        spinner $! "Installing Oh My Zsh"
     else
-        echo -e "  ${DIM}Oh My Zsh sudah terinstall, skip.${RS}"
+        echo -e "  ${DIM}Oh My Zsh is already installed, skipping.${RS}"
     fi
 
     chsh -s zsh
 
     divider
-    success "ZSH Berhasil Diinstal!"
+    success "ZSH Installed Successfully!"
     pause_menu
 }
