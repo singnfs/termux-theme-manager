@@ -1,74 +1,62 @@
 #!/bin/bash
 # ============================================================
-#   AndroRice / SingOS — Terminal Uninstaller & Reset Tool
-#   Created by: @singnfs (v1.0 Pro)
+#   modules/uninstall.sh — Opsi 6: Uninstall & Reset Termux
 # ============================================================
-
-# --- COLOR THEMES ---
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-WHITE='\033[1;37m'
-RS='\033[0m'
-
-show_header_uninstall() {
-    clear
-    echo -e "${RED}  ┌────────────────────────────────────────┐${RS}"
-    echo -e "${RED}  │    🗑️  Terminal Reset & Uninstaller     │${RS}"
-    echo -e "${RED}  │    •_• Restore Termux to Factory State  │${RS}"
-    echo -e "${RED}  └────────────────────────────────────────┘${RS}"
-    echo -e "${BLUE}  [ Creator: @singnfs ]  [ Status: Uninstaller Pro ]${RS}"
-    echo -e "  ----------------------------------------"
-    echo ""
-}
-
-spinner_uninstall() {
-    local pid=$1
-    local delay=0.1
-    local spinstr='|/-\'
-    tput civis # Hide cursor
-    while [ "$(ps -p $pid -o state= 2>/dev/null)" ]; do
-        local temp=${spinstr#?}
-        printf " [%c]  %s" "$spinstr" "$2"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\r"
-    done
-    tput cnorm # Show cursor again
-    echo -e " [${GREEN}✓${RS}] $2 ${GREEN}Done!${RS}"
-}
+# Menggunakan variabel warna & fungsi dari colors.sh (sudah di-source oleh singos.sh)
 
 action_uninstall() {
-    show_header_uninstall
-    
-    echo -e "${YELLOW}[!] Starting complete cleanup...${RS}\n"
-    sleep 1
+    show_header
+    echo -e "${R}  ┌────────────────────────────────────────────────┐${RS}"
+    echo -e "${R}  │    🗑️  Terminal Reset & Uninstaller             │${RS}"
+    echo -e "${R}  │    Restore Termux to Factory State              │${RS}"
+    echo -e "${R}  └────────────────────────────────────────────────┘${RS}"
+    echo ""
 
-    # 1. Remove Termux visual configuration (Theme, Font, Cursor, Keys)
-    (rm -f "$HOME/.termux/colors.properties" "$HOME/.termux/font.ttf" "$HOME/.termux/termux.properties") &>/dev/null &
-    spinner_uninstall $! "Removing theme, font, and extra-keys configuration"
+    echo -e "${Y}  [!] This will remove all themes, ZSH, and Oh My Zsh.${RS}"
+    echo -ne "${Y}  Are you sure? (y/N): ${RS}"
+    read -r confirm
+    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+        info "Uninstall cancelled."
+        pause_menu; return
+    fi
 
-    # 2. Wipe Oh-My-Zsh & plugins if they exist, then revert shell back to default Bash
+    echo ""
+
+    # 1. Hapus konfigurasi visual Termux (theme, font, cursor, extra-keys)
+    (rm -f "$HOME/.termux/colors.properties" \
+            "$HOME/.termux/font.ttf" \
+            "$HOME/.termux/termux.properties") &>/dev/null &
+    spinner $! "Removing theme, font, and extra-keys configuration"
+
+    # 2. Hapus banner SingOS dari .zshrc
+    if [ -f "$HOME/.zshrc" ]; then
+        (sed -i '/\.singos_banner/d' "$HOME/.zshrc"
+         sed -i '/PROMPT=/d' "$HOME/.zshrc") &>/dev/null &
+        spinner $! "Removing SingOS banner from .zshrc"
+    fi
+
+    # 3. Hapus file banner
+    (rm -f "$HOME/.singos_banner") &>/dev/null &
+    spinner $! "Removing SingOS banner file"
+
+    # 4. Hapus Oh My Zsh & plugins, kembalikan shell ke Bash
     if [ -d "$HOME/.oh-my-zsh" ] || [ -f "$HOME/.zshrc" ]; then
         (
             rm -rf "$HOME/.oh-my-zsh"
             rm -f "$HOME/.zshrc"
-            chsh -s bash
+            BASH_PATH="$(command -v bash)"
+            chsh -s "$BASH_PATH" 2>/dev/null || true
         ) &>/dev/null &
-        spinner_uninstall $! "Removing Oh-My-Zsh & restoring shell to Bash"
+        spinner $! "Removing Oh My Zsh & restoring shell to Bash"
     fi
 
-    # 3. Reload settings in realtime for an instant factory reset look
+    # 5. Reload settings Termux
     (termux-reload-settings) &>/dev/null &
-    spinner_uninstall $! "Applying Termux factory settings"
+    spinner $! "Applying Termux factory settings"
 
-    # --- FINISHING ---
-    echo -e "\n========================================"
-    echo -e "${GREEN}[✓] UNINSTALL SUCCESSFULLY COMPLETED!${RS}"
-    echo -e "========================================"
-    echo -e "${WHITE}Your Termux is now clean and fresh, just like a brand new install.${RS}"
-    echo -e "${YELLOW}Please type 'exit' or open a new session to see the changes.${RS}\n"
+    divider
+    success "Uninstall completed! Termux is now clean."
+    echo -e "${Y}  ➜  Please type 'exit' or open a new session to see the changes.${RS}"
+    echo ""
     pause_menu
 }
