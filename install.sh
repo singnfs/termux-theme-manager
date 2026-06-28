@@ -61,6 +61,5 @@ echo ""
 echo -e "${C}  ➜  Starting SingOS Theme Manager...${RS}"
 echo ""
 sleep 1
-sleep 2
 
 bash "$INSTALL_DIR/singos.sh"
