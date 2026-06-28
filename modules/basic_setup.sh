@@ -25,13 +25,19 @@ action_basic_setup() {
     show_header
     echo -e "${C}  ┌─ BASIC SETUP & DEPENDENCIES ─────────────────┐${RS}"
     echo ""
+    LOG="/tmp/singos_setup.log"
+
     info "Updating & upgrading package list..."
-    (pkg update -y && pkg upgrade -y) &>/dev/null &
-    spinner $! "pkg update & upgrade"
+    (pkg update -y && pkg upgrade -y) >"$LOG" 2>&1 &
+    PID=$!
+    spinner $PID "pkg update & upgrade"
+    wait $PID || { error "Update/upgrade failed! Check log: $LOG"; pause_menu; return; }
 
     info "Installing tools (git, curl, wget, figlet, ncurses)..."
-    (pkg install git curl wget ncurses-utils figlet -y) &>/dev/null &
-    spinner $! "Installing dependencies"
+    (pkg install git curl wget ncurses-utils figlet -y) >>"$LOG" 2>&1 &
+    PID=$!
+    spinner $PID "Installing dependencies"
+    wait $PID || { error "Install dependencies failed! Check log: $LOG"; pause_menu; return; }
 
     # Automatically execute custom keys and cursor setup
     setup_termux_keys
