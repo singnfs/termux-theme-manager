@@ -19,7 +19,13 @@ action_install_zsh() {
         echo -e "  ${DIM}Oh My Zsh is already installed, skipping.${RS}"
     fi
 
-    chsh -s zsh
+    ZSH_PATH="$(command -v zsh)"
+    if [ -n "$ZSH_PATH" ]; then
+        chsh -s "$ZSH_PATH"
+        success "Default shell changed to ZSH: $ZSH_PATH"
+    else
+        error "ZSH not found after install! Please restart Termux and try again."
+    fi
 
     divider
     success "ZSH Installed Successfully!"
