@@ -35,11 +35,8 @@ fi
 # Clone or update repository
 if [ -d "$INSTALL_DIR" ]; then
     echo -e "${Y}  ➜  SingOS is already installed, updating...${RS}"
-    git -C "$INSTALL_DIR" pull --quiet
-    cd "$INSTALL_DIR"
-    git pull --quiet 2>/dev/null || {
+    git -C "$INSTALL_DIR" pull --quiet 2>/dev/null || {
         echo -e "${R}  ✘  Update failed, attempting to re-clone...${RS}"
-        cd "$HOME"
         rm -rf "$INSTALL_DIR"
         git clone --quiet "$REPO" "$INSTALL_DIR"
     }
