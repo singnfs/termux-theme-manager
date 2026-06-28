@@ -32,7 +32,7 @@ show_menu() {
     echo -e "${C}  │ ${G}[6]${RS} ${W}Uninstall & Reset Termux                 ${C}│${RS}"
     echo -e "${C}  ├──────────────────────────────────────────────┤${RS}"
     echo -e "${C}  │ ${R}[7]${RS} ${W}Exit                                     ${C}│${RS}"
-    echo -e "${C}  └─ ... ────────────────────────────────────────┘${RS}"
+    echo -e "${C}  └──────────────────────────────────────────────┘${RS}"
     echo ""
     echo -ne "  ${G}❯ Select options (1-7): ${RS}"
     read -r opt
